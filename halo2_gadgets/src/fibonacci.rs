@@ -208,29 +208,29 @@ mod tests {
 
     #[test]
     fn test_full_prove() {
-        use halo2_curves::secp256k1::{Fq, Secp256k1Affine};
         use halo2_proofs::plonk::*;
         use halo2_proofs::poly::commitment::Params;
         use halo2_proofs::transcript::{Blake2bRead, Blake2bWrite, Challenge255, EncodedChallenge};
         use rand::rngs::OsRng;
+        use secpq_curves::secp256k1::{Affine, Scalar};
 
         let k = 4;
         let value: u64 = rand::random();
-        let value = Value::known(Assigned::from(Fq::from(value)));
+        let value = Value::known(Assigned::from(Scalar::from(value)));
 
-        let params: Params<Secp256k1Affine> = Params::new(k);
+        let params: Params<Affine> = Params::new(k);
 
-        let empty_circuit = MyCircuit::<Fp> {
+        let empty_circuit = MyCircuit::<Scalar> {
             a: Value::unknown(),
             b: Value::unknown(),
         };
 
-        let a = Fp::from(1); // F[0]
-        let b = Fp::from(1); // F[1]
-        let out = Fp::from(55); // F[9]
+        let a = Scalar::from(1); // F[0]
+        let b = Scalar::from(1); // F[1]
+        let out = Scalar::from(55); // F[9]
         let mut public_input = vec![a, b, out];
 
-        let circuit = MyCircuit::<Fp> {
+        let circuit = MyCircuit::<Scalar> {
             a: Value::known(a),
             b: Value::known(b),
         };
