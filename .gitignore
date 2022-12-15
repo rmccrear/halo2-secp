@@ -5,3 +5,4 @@ Cargo.lock
 **/*.html
 .DS_Store
 node_modules
+.next
