@@ -1,0 +1,14 @@
+{
+  "../lib/halo2Prover/halo2Prover.ts -> ./wasm/halo2_efficient_ecdsa.js": {
+    "id": "../lib/halo2Prover/halo2Prover.ts -> ./wasm/halo2_efficient_ecdsa.js",
+    "files": [
+      "static/chunks/lib_halo2Prover_wasm_halo2_efficient_ecdsa_js-lib_halo2Prover_wasm_snippets_wasm-bindgen-rayo-1a65c4.js"
+    ]
+  },
+  "../lib/halo2Prover/wasm/snippets/wasm-bindgen-rayon-7afa899f36665473/src/workerHelpers.js -> ../../..": {
+    "id": "../lib/halo2Prover/wasm/snippets/wasm-bindgen-rayon-7afa899f36665473/src/workerHelpers.js -> ../../..",
+    "files": [
+      "static/chunks/lib_halo2Prover_wasm_halo2_efficient_ecdsa_js.js"
+    ]
+  }
+}
