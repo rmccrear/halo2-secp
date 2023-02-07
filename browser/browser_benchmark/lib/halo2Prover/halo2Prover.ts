@@ -1,7 +1,13 @@
 import { expose } from "comlink";
 
-const fetch_ipa_params = async k => {
-  const response = await fetch(`http://localhost:3000/params_k_${k}.bin`);
+const fetch_ipa_params = async (k: any) => {
+  const cors_proxy = "https://cors-anywhere.herokuapp.com/";
+  const response = await fetch(
+    `${cors_proxy}https://zk-benchmark.s3.us-west-1.amazonaws.com/params_k_${k}.bin`
+  );
+  // const response = await fetch(
+  //   `https://zk-benchmark.s3.us-west-1.amazonaws.com/params_k_${k}.bin`
+  // );
   const bytes = await response.arrayBuffer();
 
   const params = new Uint8Array(bytes);
