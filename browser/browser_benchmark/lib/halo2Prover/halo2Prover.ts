@@ -1,13 +1,12 @@
 import { expose } from "comlink";
+const USE_CORS = false;
 
 const fetch_ipa_params = async (k: any) => {
-  const cors_proxy = "https://cors-anywhere.herokuapp.com/";
+  // Note that this site is broken and rate limited, we recommend deprecating this and using your own
+  const cors_proxy = USE_CORS ? "https://cors-anywhere.herokuapp.com/" : "";
   const response = await fetch(
     `${cors_proxy}https://zk-benchmark.s3.us-west-1.amazonaws.com/params_k_${k}.bin`
   );
-  // const response = await fetch(
-  //   `https://zk-benchmark.s3.us-west-1.amazonaws.com/params_k_${k}.bin`
-  // );
   const bytes = await response.arrayBuffer();
 
   const params = new Uint8Array(bytes);

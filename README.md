@@ -1,4 +1,12 @@
-# halo2 [![Crates.io](https://img.shields.io/crates/v/halo2.svg)](https://crates.io/crates/halo2) #
+# halo2 [![Crates.io](https://img.shields.io/crates/v/halo2.svg)](https://crates.io/crates/halo2)
+
+## Browser Benchmarking halo2-secp
+
+```
+cd browser
+curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+sh ./scripts/build_wasm.sh
+```
 
 ## [Documentation](https://docs.rs/halo2)
 
@@ -18,9 +26,9 @@ The `RAYON_NUM_THREADS` environment variable can be used to set the number of th
 
 Licensed under either of
 
- * Apache License, Version 2.0, ([LICENSE-APACHE](LICENSE-APACHE) or
-   http://www.apache.org/licenses/LICENSE-2.0)
- * MIT license ([LICENSE-MIT](LICENSE-MIT) or http://opensource.org/licenses/MIT)
+- Apache License, Version 2.0, ([LICENSE-APACHE](LICENSE-APACHE) or
+  http://www.apache.org/licenses/LICENSE-2.0)
+- MIT license ([LICENSE-MIT](LICENSE-MIT) or http://opensource.org/licenses/MIT)
 
 at your option.
 
