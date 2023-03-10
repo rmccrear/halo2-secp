@@ -5,7 +5,14 @@ const fetch_ipa_params = async (k: any) => {
   // Note that this site is broken and rate limited, we recommend deprecating this and using your own
   const cors_proxy = USE_CORS ? "https://cors-anywhere.herokuapp.com/" : "";
   const response = await fetch(
-    `${cors_proxy}https://zk-benchmark.s3.us-west-1.amazonaws.com/params_k_${k}.bin`
+    `${cors_proxy}https://zk-benchmark.s3.us-west-1.amazonaws.com/params_k_${k}.bin`,
+    {
+      method: "GET",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/octet-stream" // set content type to binary
+      }
+    }
   );
   const bytes = await response.arrayBuffer();
 
