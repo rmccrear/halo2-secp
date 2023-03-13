@@ -1,24 +1,11 @@
 import { chromium } from '@playwright/test';
 import { test, expect } from '@playwright/test';
+import { capabilities_list } from './lambdatest-setup';
 
 let page:any, browser:any;
 
 test.beforeAll(async () => {
-    const capabilities = {
-      'browserName': 'Chrome', // Browsers allowed: `Chrome`, `MicrosoftEdge`, `pw-chromium`, `pw-firefox` and `pw-webkit`
-      'browserVersion': 'latest',
-      'LT:Options': {
-        'platform': 'Windows 10',
-        'build': 'Playwright Halo Benchmark Build',
-        'name': 'Playwright Halo Benchmark Test',
-        'user': process.env.LT_USERNAME,
-        'accessKey': process.env.LT_ACCESS_KEY,
-        'network': true,
-        'video': true,
-        'console': true,
-        'tunnel': true
-      }
-    }
+    const capabilities = capabilities_list[0];
   
     browser = await chromium.connect({
       wsEndpoint: `wss://cdp.lambdatest.com/playwright?capabilities=${encodeURIComponent(JSON.stringify(capabilities))}`
@@ -82,4 +69,44 @@ test('scalar mult full', async () => {
     }
     expect(msgText).toMatch(expected[i]);
   }
+});
+
+
+const benchmarkMinSamples = 1; // The minimum number of samples to run the same test
+const evalCount = 1; // The number of experiments to run (and compare)
+test('scalar mult full benchmark.js', async () => {
+  await page.goto('http://localhost:3000/benchmarkjs');
+
+  await expect(page.getByRole('button', { name: 'benchmark: prove (scalar mult full)' })).toBeVisible();;
+  const expected = /Stats for: /;
+
+  await page.getByLabel('min samples:').fill(benchmarkMinSamples.toString());
+  await expect(page.getByLabel('min samples:')).toHaveValue(benchmarkMinSamples.toString());
+
+  let msgPromise, msg; 
+  await page.getByRole('button', { name: 'benchmark: prove (scalar mult full)' }).click();
+  console.log("Starting benchmark");
+  // If we have more than one test in our benchmarks (.add() calls)),
+  // we need to loop through the console messages.
+  for(let i = 0; i < evalCount; i++) {
+    let msgText;
+    msgPromise = page.waitForEvent('console');
+    msg = await msgPromise;
+    msgText = msg.text();
+    console.log(msgText);
+    // while(msgText.includes("Circular dependency") || msgText.includes("WebSocket connection to")) {
+    while(!msgText.match(expected) ){
+      msgPromise = page.waitForEvent('console');
+      msg = await msgPromise;
+      msgText = msg.text();
+      console.log(msgText);
+    }
+    msgPromise = page.waitForEvent('console');
+    expect(msgText).toMatch(expected);
+
+    msg = await msgPromise;
+    msgText = msg.text();
+    console.log(msgText);
+  }
+
 });
