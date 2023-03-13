@@ -11,6 +11,7 @@ import { defineConfig, devices } from '@playwright/test';
  */
 export default defineConfig({
   testDir: './e2e',
+  testMatch: 'halo2-local.spec.ts',
   /* Maximum time one test can run for. */
   timeout: 60 * 60 * 1000, // 1 hour
   expect: {

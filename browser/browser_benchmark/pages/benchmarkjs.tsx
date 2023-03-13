@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Script from 'next/script'
-import Benchmark from "benchmark";
+import type Benchmark from "benchmark";
 import { wrap } from "comlink";
 
 const withProverApi = (worker: Worker) =>

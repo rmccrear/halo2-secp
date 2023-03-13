@@ -1,5 +1,7 @@
 import { test, expect } from '@playwright/test';
 
+const benchmarkMinSamples = 5 ; // The minimum number of samples to run the same test
+const evalCount = 1; // The number of experiments that are run and compared. (How many times `run` was called.)
 
 test('has button', async ({ page }) => {
 
@@ -46,8 +48,6 @@ test('scalar mult full', async ({page}) => {
   }
 });
 
-const benchmarkMinSamples = 10; // The minimum number of samples to run the same test
-const evalCount = 1; // The number of experiments to run (and compare)
 test('scalar mult full benchmark.js', async ({page}) => {
   await page.goto('http://localhost:3000/benchmarkjs');
 
