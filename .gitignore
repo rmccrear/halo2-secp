@@ -6,3 +6,10 @@ Cargo.lock
 .DS_Store
 node_modules
 .next
+
+**/node_modules/
+**/test-results/
+**/playwright-report/
+**/playwright/.cache/
+LT
+lt.log
