@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - bench
 
 permissions:
   contents: write
